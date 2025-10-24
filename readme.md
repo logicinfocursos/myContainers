@@ -1,6 +1,7 @@
 # myContainers
+[repositório github](https://github.com/logicinfocursos/myContainers.git)
 
-Este repositório contém arquivos docker-compose para executar containers de ambientes como Ollama, Kind, Minikube e K3d.
+Este repositório contém arquivos docker-compose para executar containers de ambientes como Jellyfin, Ollama, Kind, Minikube e K3d.
 
 ## Estrutura
 - `docker-compose-jellyfin.yml`: Executa o Jellyfin
