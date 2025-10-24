@@ -1,0 +1,7 @@
+# Ignore volumes and system files
+volumes/
+*.log
+*.tmp
+__pycache__/
+.env
+.DS_Store

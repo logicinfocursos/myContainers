@@ -1,0 +1,12 @@
+version: "3.8"
+services:
+  kind:
+    image: kindest/node:latest
+    container_name: kind
+    privileged: true
+    ports:
+      - "6443:6443"
+    volumes:
+      - A:/workspaces/containers/newContainers/volumes/kind:/kind
+    command: ["sleep", "infinity"]
+    restart: unless-stopped

@@ -1,0 +1,12 @@
+# docker-compose -f docker-compose-ollama.yml up -d
+# docker-compose -f docker-compose-ollama.yml down
+#version: "3.8"
+services:
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - A:/workspaces/containers/newContainers/volumes/ollama:/root/.ollama
+    restart: unless-stopped

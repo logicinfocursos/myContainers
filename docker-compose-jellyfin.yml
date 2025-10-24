@@ -1,0 +1,49 @@
+# Versão do Docker Compose. A 3.8 é uma versão moderna e estável.http://localhost:8096/web/#/wizarduser.htmlael
+version: '3.8'
+
+# Definimos os serviços (containers) que serão executados.
+services:
+  # Nome do nosso serviço, pode ser o que você quiser, mas "jellyfin" é padrão.
+  jellyfin:
+    # Imagem oficial do Jellyfin do Docker Hub.
+    image: jellyfin/jellyfin
+    
+    # Um nome amigável para o container, facilita a gestão.
+    container_name: jellyfin-server
+    
+    # Política de reinicialização. "unless-stopped" garante que o Jellyfin
+    # inicie automaticamente com o Windows (via Docker Desktop) e reinicie
+    # se cair, a menos que você o pare manualmente.
+    restart: unless-stopped
+    
+    # Mapeamento de portas. Mapeamos a porta 8096 do container para a porta 8096
+    # do seu computador (host). A porta 8920 é para acesso HTTPS, que é útil
+    # para o acesso remoto futuro.
+    ports:
+      - "8096:8096" # Porta HTTP
+      - "8920:8920" # Porta HTTPS (opcional, mas recomendado para o futuro)
+    
+    # Mapeamento de volumes. Esta é a parte mais importante.
+    # Aqui conectamos pastas do seu computador a pastas dentro do container.
+    volumes:
+      # Volume para as configurações do Jellyfin.
+      # O container salvará tudo em /config, mas na verdade estará no seu HD.
+      - A:\workspaces\containers\newContainers\volumes\jellyfin\config:/config
+      
+      # Volume para o cache de transcodificação e mídias.
+      # É bom separar para não poluir o volume de configuração.
+      - A:\workspaces\containers\newContainers\volumes\jellyfin\cache:/cache
+      
+      # Volume principal para as suas mídias.
+      # Mapeamos a pasta raiz 'A:\medias' para '/data' dentro do container.
+      # É mais simples e organizado do que mapear cada subpasta individualmente.
+      - A:\medias:/media
+      
+    # Variáveis de ambiente.
+    # PUID e PGID são para definir o usuário que o container usará internamente.
+    # No Windows com Docker Desktop, eles geralmente são ignorados, mas é uma
+    # boa prática mantê-los para compatibilidade e se um dia você migrar para Linux.
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Sao_Paulo # Define o fuso horário para os logs e agendamentos.

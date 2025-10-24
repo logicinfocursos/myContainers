@@ -1,0 +1,12 @@
+version: "3.8"
+services:
+  minikube:
+    image: medyagh/minikube:latest
+    container_name: minikube
+    privileged: true
+    ports:
+      - "8443:8443"
+    volumes:
+      - A:/workspaces/containers/newContainers/volumes/minikube:/minikube
+    command: ["sleep", "infinity"]
+    restart: unless-stopped

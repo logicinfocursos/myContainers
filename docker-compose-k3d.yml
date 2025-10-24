@@ -1,0 +1,12 @@
+version: "3.8"
+services:
+  k3d:
+    image: rancher/k3s:v1.28.4-k3s1
+    container_name: k3d
+    privileged: true
+    ports:
+      - "6443:6443"
+    volumes:
+      - A:/workspaces/containers/newContainers/volumes/k3d:/k3d
+    command: ["sleep", "infinity"]
+    restart: unless-stopped
